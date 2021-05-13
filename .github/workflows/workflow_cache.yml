@@ -25,7 +25,7 @@ jobs:
           cache-name: cache-gocode
         with:
           # Cache the code base of the project
-          path: ~/
+          path: ~/*
           key: ${{ env.cache-name }}-workflow-cache
       - name: no-cache
         run: |
