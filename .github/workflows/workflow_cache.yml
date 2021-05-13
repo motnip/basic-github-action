@@ -18,6 +18,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+        shell: bash
       - uses: actions/checkout@v2
       - name: Cache codebase
         uses: actions/cache@v2
@@ -25,7 +30,8 @@ jobs:
           cache-name: cache-gocode
         with:
           # Cache the code base of the project
-          path: ~/
+          path: ~/sample.txt
+          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-sample
           key: ${{ env.cache-name }}-workflow-cache
       - name: no-cache
         run: |
@@ -37,6 +43,10 @@ jobs:
     needs: step-no-cache
     runs-on: ubuntu-latest
     steps:
+      - name: cache-hit
+        if: steps.cache-primes.outputs.cache-hit != 'true'
+        run: |
+          echo "cache miss :("
       - name: verify
         run: |
           echo "pwd"
