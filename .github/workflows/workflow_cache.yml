@@ -32,7 +32,6 @@ jobs:
           # Cache the code base of the project
           path: ~/sample.txt
           key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-sample
-          key: ${{ env.cache-name }}-workflow-cache
       - name: no-cache
         run: |
           echo "pwd"
