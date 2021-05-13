@@ -38,10 +38,6 @@ jobs:
           pwd
           echo "list file"
           ls .
-  step-use-cache:
-    needs: step-no-cache
-    runs-on: ubuntu-latest
-    steps:
       - name: cache-hit
         if: steps.cache-primes.outputs.cache-hit != 'true'
         run: |
