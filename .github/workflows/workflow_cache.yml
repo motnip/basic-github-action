@@ -24,14 +24,14 @@ jobs:
           echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
         shell: bash
       - uses: actions/checkout@v2
-      - name: Cache codebase
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-gocode
-        with:
-          # Cache the code base of the project
-          path: ~/sample.txt
-          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-sample
+      #- name: Cache codebase
+      #  uses: actions/cache@v2
+      #  env:
+      #    cache-name: cache-gocode
+      #  with:
+      #    # Cache the code base of the project
+      #    path: ~/sample.txt
+      #    key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-sample
       - name: no-cache
         run: |
           echo "pwd"
