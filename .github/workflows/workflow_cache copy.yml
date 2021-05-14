@@ -43,6 +43,7 @@ jobs:
     needs: run-with-cache
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: actions/checkout@v2
       - name: cache-hit
         if: steps.cache-primes.outputs.cache-hit != 'true'
         run: |
