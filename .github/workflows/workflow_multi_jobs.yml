@@ -7,19 +7,19 @@ jobs:
   run-with-cache:
     runs-on: ubuntu-latest
     steps:
-      #- name: Get Date
-      #  id: get-date
-      #  run: |
-      #    echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
-      #  shell: bash
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+        shell: bash
       - uses: actions/checkout@v2
-      #- name: Cache codebase
-      #  uses: actions/cache@v2
-      #  env:
-      #    cache-name: cache-gocode
-      #  with:
-      #    path: ~/sample.txt
-      #    key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-sample
+      - name: Cache codebase
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-gocode
+        with:
+          path: ~/*
+          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-sample
       - name: list-file
         run: |
           echo "pwd"
@@ -30,6 +30,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: run-with-cache
     steps:
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
+        shell: bash
+      - uses: actions/checkout@v2
+      - name: Cache codebase
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-gocode
+        with:
+          path: ~/*
+          key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-sample
       - uses: actions/checkout@v2
       - name: cache-hit
         if: steps.cache-primes.outputs.cache-hit != 'true'
